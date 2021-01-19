@@ -1,0 +1,41 @@
+# gateway 配置
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        port: 8719 # sentinel需要回调服务应用
+        dashboard: 127.0.0.1:8080
+
+    gateway:
+      discovery:
+        locator:
+          enabled: true   #让gateway可以发现nacos或者eureka中的微服务
+      routes:
+        - id: order-service-route      #路由ID，没有固定规则但要求唯一，建议配合服务名uri:http:/localhost:8000#匹配后提供服务的路由地
+          uri: lb://order-service     #lb指的是从nacos或者eureka中按照名称获取微服务,并遵循负载均衡策略
+          predicates:
+            - Path=/order/list/**      #断言，路径相匹配的进行路由
+        - id: order-service-route2
+          uri: lb://order-service
+          predicates:
+            - Path=/order/info/**
+        - id: order-service-route3
+          uri: lb://order-service
+          predicates:
+            - Path=/order/create/**
+            #- After=2020-12-23T15:27:57.999+08:00[Asia/Shanghai]
+            #- Cookie=username,cuixinfu            #请求头带cookie
+            #- AddRequestHeade=X-Request-red, blue #请求头要X-Request-Id属性并互值为整数的正则表达式
+            #- PrefixPath=/order                   #请求前缀要为这个
+            #- Host=**.sky.com
+            #- Method=POST
+
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

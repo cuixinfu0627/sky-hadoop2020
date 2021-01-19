@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sky.hadoop</groupId>
+  <artifactId>sky-hadoop2020</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Maven</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://maven.apache.org/</url>
+  <inceptionYear>2001</inceptionYear>
+
+  <distributionManagement>
+    <site>
+      <id>website</id>
+      <url>scp://webhost.company.com/www/website</url>
+    </site>
+  </distributionManagement>
+
+  <modules>
+    <module>sky-hadoop-common</module>
+    <module>sky-hadoop-gateway</module>
+    <module>sky-hadoop-item</module>
+    <module>sky-hadoop-order</module>
+    <module>sky-hadoop-passport</module>
+  </modules>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF- 8</project.reporting.outputEncoding>
+
+    <!-- jdk版本 -->
+    <java.version>1.8</java.version>
+    <log.window.path>D:\\logs\\sky-hadoop\\</log.window.path>
+    <log.linux.path>/home/webuser/logs/sky-hadoop/</log.linux.path>
+    <log.root.level>info</log.root.level>
+    <log.history.days>30</log.history.days>
+    <log.pattern>===========%d{yyyy-MM-dd HH:mm:ss} %level %c:%L - %msg%n</log.pattern>
+    <log.maxFileSize>50MB</log.maxFileSize>
+    <log.totalSizeCap>1GB</log.totalSizeCap>
+
+    <!-- 选择SpringCloud和Alibaba版本的时候，一定要参考官网的建议，否则会有问题 -->
+    <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
+    <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+    <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
+
+
+    <servlet.version>4.0.1</servlet.version>
+    <slf4j-api.version>1.7.30</slf4j-api.version>
+    <lombok.version>1.18.4</lombok.version>
+    <junit.version>4.12</junit.version>
+
+
+    <!-- slf4j 日志 依赖 -->
+    <mysql.version>5.1.47</mysql.version>
+    <druid.version>1.1.16</druid.version>
+    <druid-spring-boot.version>1.1.10</druid-spring-boot.version>
+    <mybatisplus.version>3.3.1</mybatisplus.version>
+    <mybatis.spring.boot.version>2.1.2</mybatis.spring.boot.version>
+
+    <!-- json 依赖 -->
+    <gson.version>2.8.6</gson.version>
+    <fastjson.version>1.2.58</fastjson.version>
+    <jackson-databind.version>2.10.3</jackson-databind.version>
+    <jsoup.version>1.12.2</jsoup.version>
+    <json-lib.version>2.4</json-lib.version>
+    <joda-time.version>2.9.9</joda-time.version>
+    <hutool.version>5.5.7</hutool.version>
+
+
+    <!-- commons -->
+    <commons-lang3.version>3.10</commons-lang3.version>
+    <commons-lang.version>2.6</commons-lang.version>
+    <commons-io.version>2.5</commons-io.version>
+
+  </properties>
+
+
+  <dependencyManagement>
+    <dependencies>
+      <!--spring boot 依赖-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!--spring sky.cloud 依赖-->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!--spring sky.cloud alibaba依赖-->
+      <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+        <version>${spring-cloud-alibaba.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- mysql 依赖 -->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>${druid.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>${druid-spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mybatis.spring.boot</groupId>
+        <artifactId>mybatis-spring-boot-starter</artifactId>
+        <version>${mybatis.spring.boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>${mybatisplus.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${servlet.version}</version>
+      </dependency>
+
+      <!-- logo日志管理 -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j-api.version}</version>
+      </dependency>
+
+      <!-- Json 处理 -->
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>${gson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>${commons-lang.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson-databind.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.json-lib</groupId>
+        <artifactId>json-lib</artifactId>
+        <version>${json-lib.version}</version>
+        <classifier>jdk15</classifier>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.jsoup</groupId>
+        <artifactId>jsoup</artifactId>
+        <version>${jsoup.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>${joda-time.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!--热部署工具dev-tools-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+        <scope>runtime</scope>
+      </dependency>
+
+      <!--测试工具-test-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+      </dependency>
+  </dependencies>
+
+
+  <profiles>
+    <profile>
+      <id>custom-service-port</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+
+        <!--passport-service 模块-->
+        <passport-server-port-suffix>01</passport-server-port-suffix>
+        <passport-server-port>80${passport-server-port-suffix}</passport-server-port>
+        <passport-devtools-port>100${passport-server-port-suffix}</passport-devtools-port>
+
+        <!--order-service 模块-->
+        <order-server-port-suffix>02</order-server-port-suffix>
+        <order-server-port>80${order-server-port-suffix}</order-server-port>
+        <order-devtools-port>100${order-server-port-suffix}</order-devtools-port>
+
+        <!--item-service 模块-->
+        <item-server-port-suffix>03</item-server-port-suffix>
+        <item-server-port>80${item-server-port-suffix}</item-server-port>
+        <item-devtools-port>100${item-server-port-suffix}</item-devtools-port>
+
+        <!--gateway-server- 服务网关模块一般都是9527-->
+        <gateway-server-port-suffix>27</gateway-server-port-suffix>
+        <gateway-server-port>95${gateway-server-port-suffix}</gateway-server-port>
+        <gateway-devtools-port>100${gateway-server-port-suffix}</gateway-devtools-port>
+
+      </properties>
+    </profile>
+  </profiles>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <fork>true</fork>
+          <addResources>true</addResources>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+
+</project>

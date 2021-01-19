@@ -1,0 +1,17 @@
+server:
+  port: @gateway-server-port@
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+    servlet:
+      context-path: /
+
+spring:
+  application:
+    name: gateway-server
+  profiles:
+    active: @package.environment@
+
+logging:
+  config: classpath:logback.xml

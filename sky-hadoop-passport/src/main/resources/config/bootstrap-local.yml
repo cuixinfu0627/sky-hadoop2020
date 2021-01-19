@@ -1,0 +1,71 @@
+spring:
+  cloud:
+    # Nacos服务配置
+    nacos:
+      config:
+        # ${spring.application.name]-$(spring.profile.active}.$(spring.cloud.nacos.config.file-extension}
+        #server-addr: 192.168.1.144:1111 #集群配置
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        group: LOCAL_GROUP  #组名
+        namespace: d7dffbae-b253-46ea-9b85-3bd6fe69b2b1  #命名空间
+        shared-dataids: sky-common-service.yaml  #通用配置
+        refreshable-dataids: sky-common-service.yaml
+      discovery:
+        #server-addr: 192.168.1.144:1111 #集群配置
+        server-addr: 127.0.0.1:8848
+    # Sentinel服务配置
+    sentinel:
+      transport:
+        # sentinel dashboard 地址
+        dashboard: 127.0.0.1:8080
+        # 默认为8719，如果被占用会自动+1，直到找到为止
+        port: 8719
+      # 流控规则持久化到nacos
+      datasource:
+        nacos:
+          server-addr: 127.0.0.1:8848
+          data-id: passport-service #cloudalibaba-sentinel-service
+          group-id: DEFAULT_GROUP
+          data-type: json
+          rule-type: flow
+
+  # 链路追踪sleuth+zipkin 服务配置
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      #采样值介于0到1之间，1则表示全部采集
+      probability: 1
+
+# 消费者将要去访问的微服务名称（注册成功进nacos的微服务是供者）
+service-url:
+  nacos-order-service: http://order-service
+  nacos-item-service: http://item-service
+
+# web服务监控端点暴露
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# 设置feign客户端超时时间（OpenFeign默认支持ribbon）
+ribbon:
+  # 指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间
+  ReadTimeout: 5000
+  #指的是建立连接后从服务器读取到可用资源所用的时间
+  ConnectTimeout: 5000
+
+# 日志级别控制
+logging:
+  level:
+    # feign日志以什么级别监州哪个接口
+    com.sky.cloud.service.OrderFeignService: debug
+
+# feign配置对sentinel的支持,配置对hystrix的支持
+feign:
+  sentinel:
+    enabled: true
+  hystrix:
+    enabled: true

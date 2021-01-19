@@ -1,0 +1,11 @@
+# sky-cloud
+
+#消费者 8001
+127.0.0.1 	passport.sky.com
+#提供者 8002
+127.0.0.1 	order.sky.com
+#提供者 8003
+127.0.0.1 	item.sky.com
+#eureka服务ip
+127.0.0.1	eureka-server
+
